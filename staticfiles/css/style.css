@@ -11046,7 +11046,7 @@ label.error {
   .category-box:before {
     content: "";
     position: absolute;
-    background-image: url(../images/category/dot1.png);
+    background-image: url();
     top: 20px;
     left: 20px;
     width: 80px;
@@ -11070,7 +11070,7 @@ label.error {
     .category-box.back:before {
       content: "";
       position: absolute;
-      background-image: url(../images/category/dot2.png);
+      background-image: url();
       top: 20px;
       left: 20px;
       width: 80px;
