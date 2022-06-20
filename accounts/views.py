@@ -121,10 +121,10 @@ def generate_key(request):
                         matrix_key = int((det))
                         steg_order = f"{steg_key1}-{steg_key2}-{steg_key3}-{steg_key4}-{steg_key5}-{steg_key6}-{steg_key7}-{steg_key8}-{steg_key9}"
                         (publicKey, privateKey) = rsa.newkeys(key_length)
-                        with open(f'media/f5/f5_order_from_{request.user.username}_to_{email}.txt', 'w') as f:
+                        with open(f'f5/f5_order_from_{request.user.username}_to_{email}.txt', 'w') as f:
                             f.write(steg_order)
                             f.close()
-                        with open(f'media/keys/public_keys/publicKey_from_{request.user.username}_to_{email}.pem', 'wb') as p:
+                        with open(f'keys/public_keys/publicKey_from_{request.user.username}_to_{email}.pem', 'wb') as p:
                             p.write(publicKey.save_pkcs1('PEM'))
                         with open(f'media/keys/private_keys/privateKey_from_{request.user.username}_to_{email}.pem', 'wb') as p:
                             p.write(privateKey.save_pkcs1('PEM'))
@@ -171,10 +171,10 @@ def encrypt(request):
         destination_email = request.POST.get("email")
         message = request.POST.get("message")
         try:
-            with open(f'media/keys/public_keys/publicKey_from_{request.user.username}_to_{destination_email}.pem', 'rb') as p:
+            with open(f'keys/public_keys/publicKey_from_{request.user.username}_to_{destination_email}.pem', 'rb') as p:
                 publicKey = rsa.PublicKey.load_pkcs1(p.read())
                 print(publicKey)
-            f = open( f"media/f5/f5_order_from_{request.user.username}_to_{destination_email}.txt", "r")
+            f = open( f"f5/f5_order_from_{request.user.username}_to_{destination_email}.txt", "r")
             f5_order = f.read().split("-")
         except:
             message = "No public key matching the specified email"
@@ -209,7 +209,7 @@ def f5_encrypt(request):
         img_location = f"encrypted_images/from_{request.user.username}_image{new_message.id}.png"
         new_message.image = img_location
         new_message.save()
-        newimg.save(f"media/encrypted_images/from_{request.user.username}_image{new_message.id}.png")
+        newimg.save(f"encrypted_images/from_{request.user.username}_image{new_message.id}.png")
         return redirect("home:home")
         
 
