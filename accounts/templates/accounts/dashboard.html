@@ -1,0 +1,117 @@
+{% extends "home/index.html" %}
+{% load static %}
+
+
+	{% block body %}
+        
+	<div class="page-content bg-white">
+	
+		<!-- Inner Banner -->
+		<div class="banner-wraper">
+			<div class="page-banner banner-lg contact-banner" >
+				<div class="container">
+					<div class="page-banner-entry text-center">
+						<h1>Dashboard</h1>
+						<!-- Breadcrumb row -->
+						<nav aria-label="breadcrumb" class="breadcrumb-row">
+							<ul class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">My Dashboard</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				<img class="pt-img1 animate-wave" src="{% static 'images/shap/wave-bg.png' %}" alt="" style="height: 70px;">
+				<img class="pt-img2 animate2" src="{% static 'images/shap/circle.png' %}" alt="" style="height: 70px;">
+				<img class="pt-img3 animate-rotate" src="{% static 'images/shap/circle.png' %}" alt="" style="height: 70px;">
+			</div>
+			<!-- Breadcrumb row END -->
+			<div class="section-area">
+				<div class="container text-center">
+					<h2>Welcome {{ request.user.username }}</h2>
+				</div>
+			</div>
+		</div>
+		<!-- Inner Banner end -->
+		
+		
+		<!-- About us -->
+		<section class="section-area section-sp1">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-4 col-md-6 mb-30">
+						<div class="feature-container feature-bx4 feature4">
+							<div class="icon-md feature-icon">
+								<!-- <img src="../images/icon/icon1.png" alt=""> -->
+							</div>
+							<div class="icon-content">
+								<a href="{% url 'accounts:generate-key' %}"><h5 class="ttr-title">Generate Keys</h5></a>
+								<p>Generate public key for yourself and a private key for the receiver of your information</p>
+								
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6 mb-30">
+						<div class="feature-container feature-bx4 feature3">
+							<div class="icon-md feature-icon">
+								<!-- <img src="../images/icon/icon3.png" alt=""> -->
+							</div>
+							<div class="icon-content">
+								<a href="{% url 'accounts:encrypt' %}"><h5 class="ttr-title">Encrypt Message</h5></a>
+								<p>Go through the procedure to send information by encrypting and hiding information</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6 mb-30">
+						<div class="feature-container feature-bx4 feature2">
+							<div class="icon-md feature-icon">
+								<!-- <img src="../images/icon/icon2.png" alt=""> -->
+							</div>
+							<div class="icon-content">
+								<a href="{% url 'accounts:decrypt' %}"><h5 class="ttr-title">Decrypt Message</h5></a>
+								<p>Here, you seperate the image from the cipher-text, then decrypt the cyphertext.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6 mb-30">
+						<div class="feature-container feature-bx4 feature3">
+							<div class="icon-md feature-icon">
+								<!-- <img src="../images/icon/icon3.png" alt=""> -->
+							</div>
+							<div class="icon-content">
+								<a href="{% url 'accounts:sending-keys' %}"><h5 class="ttr-title">View Sending Keys</h5></a>
+								<p>Here, you can see your generated keys, timestamps, email addresses involved in the transmission</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6 mb-30">
+						<div class="feature-container feature-bx4 feature2">
+							<div class="icon-md feature-icon">
+								<!-- <img src="../images/icon/icon2.png" alt=""> -->
+							</div>
+							<div class="icon-content">
+								<a href="{% url 'accounts:receiving-keys' %}"><h5 class="ttr-title">View Receiving Keys</h5></a>
+								<p>Here, you can see your receiving keys, timestamps, email addresses involved in the transmission.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6 mb-30">
+						<div class="feature-container feature-bx4 feature4">
+							<div class="icon-md feature-icon">
+								<!-- <img src="../images/icon/icon1.png" alt=""> -->
+							</div>
+							<div class="icon-content">
+								<a href="{% url 'accounts:messages' %}"><h5 class="ttr-title">View Messages</h5></a>
+								<p>Here, you can see all your messages, sent and received, timestamp and emails involved in the transmission.</p>
+								
+							</div>
+						</div>
+					</div>					
+				</div>
+			</div>
+		</section>
+		
+	</div>
+
+	{% endblock body %}
+	
