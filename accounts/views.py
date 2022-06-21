@@ -8,6 +8,8 @@ from PIL import Image
 import PIL 
 from .models import Key, Message
 from .main import encode_enc
+import os
+from django.conf import settings
 
 # Create your views here.
 
@@ -121,20 +123,26 @@ def generate_key(request):
                         matrix_key = int((det))
                         steg_order = f"{steg_key1}-{steg_key2}-{steg_key3}-{steg_key4}-{steg_key5}-{steg_key6}-{steg_key7}-{steg_key8}-{steg_key9}"
                         (publicKey, privateKey) = rsa.newkeys(key_length)
-                        with open(f'f5/f5_order_from_{request.user.username}_to_{email}.txt', 'w') as f:
+
+                        new_key = Key(user=request.user, destination_email=email, public_key="public_key.pem", private_key="private_key.pem", f5_order="f5.txt", matrix_key=matrix_key)
+
+                        new_key.f5_order.name = f"/f5/f5_order_from_{request.user.username}_to_{email}.txt"
+                        new_path_f5 = settings.MEDIA_ROOT + new_key.f5_order.name
+                        new_key.public_key.name = f"/keys/public_keys/publicKey_from_{request.user.username}_to_{email}.pem"
+                        new_path_public = settings.MEDIA_ROOT + new_key.public_key.name
+                        new_key.private_key.name = f"/keys/private_keys/privateKey_from_{request.user.username}_to_{email}.pem"
+                        new_path_private = settings.MEDIA_ROOT + new_key.private_key.name
+                      
+                        with  open(str(new_path_f5), 'w') as f:
                             f.write(steg_order)
                             f.close()
-                        with open(f'keys/public_keys/publicKey_from_{request.user.username}_to_{email}.pem', 'wb') as p:
+                        with  open(str(new_path_public), 'wb') as p:
                             p.write(publicKey.save_pkcs1('PEM'))
-                        with open(f'media/keys/private_keys/privateKey_from_{request.user.username}_to_{email}.pem', 'wb') as p:
+                            f.close()
+                        with  open(str(new_path_private), 'wb') as p:
                             p.write(privateKey.save_pkcs1('PEM'))
-        
-                        f_key = f"f5/f5_order_from_{request.user.username}_to_{email}.txt"
-                        pr_key = f"keys/private_keys/privateKey_from_{request.user.username}_to_{email}.pem"
-                        pu_key = f"keys/public_keys/publicKey_from_{request.user.username}_to_{email}.pem"
-                        new_key = Key(user=request.user, destination_email=email, public_key=pu_key, private_key=pr_key, f5_order=f_key, matrix_key=matrix_key)
+                            f.close()
                         new_key.save()
-                        print(new_key.public_key.url)
                         context = {
                             "public_key": publicKey,
                             "steg_key1":steg_key1,
@@ -155,7 +163,7 @@ def generate_key(request):
                         return redirect("accounts:generate-key")
                         
             else:
-                message = "This email is not registered on our database"
+                message = "This email is not reg+istered on our database"
                 return redirect("accounts:generate-key")
 
         else:
@@ -170,12 +178,15 @@ def encrypt(request):
     if request.method == "POST":
         destination_email = request.POST.get("email")
         message = request.POST.get("message")
+        public_key_url = f"/keys/public_keys/publicKey_from_{request.user.username}_to_{destination_email}.pem"
+        new_path_public = settings.MEDIA_ROOT + public_key_url
+        destination_email_url = f"/f5/f5_order_from_{request.user.username}_to_{destination_email}.txt"
+        new_path_destination_email = settings.MEDIA_ROOT + destination_email_url
         try:
-            with open(f'keys/public_keys/publicKey_from_{request.user.username}_to_{destination_email}.pem', 'rb') as p:
+            with open(str(new_path_public), 'rb') as p:
                 publicKey = rsa.PublicKey.load_pkcs1(p.read())
                 print(publicKey)
-            f = open( f"f5/f5_order_from_{request.user.username}_to_{destination_email}.txt", "r")
-            f5_order = f.read().split("-")
+            f = open( str(new_path_destination_email), "r")
         except:
             message = "No public key matching the specified email"
             return redirect("accounts:encrypt")
@@ -209,7 +220,9 @@ def f5_encrypt(request):
         img_location = f"encrypted_images/from_{request.user.username}_image{new_message.id}.png"
         new_message.image = img_location
         new_message.save()
-        newimg.save(f"encrypted_images/from_{request.user.username}_image{new_message.id}.png")
+        new_image_url = f"/encrypted_images/from_{request.user.username}_image{new_message.id}.png"
+        new_path_image = settings.MEDIA_ROOT + new_image_url
+        newimg.save(str(new_path_image))
         return redirect("home:home")
         
 

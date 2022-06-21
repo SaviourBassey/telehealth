@@ -4,12 +4,12 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Key(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    destination_email = models.EmailField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    destination_email = models.EmailField(null=True, blank=True)
     public_key = models.FileField(upload_to="keys/public_keys")
     private_key = models.FileField(upload_to="keys/private_keys")
     f5_order = models.FileField(upload_to="f5")
-    matrix_key = models.IntegerField()
+    matrix_key = models.IntegerField(default=0)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
