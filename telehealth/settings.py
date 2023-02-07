@@ -28,9 +28,9 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production! https://web-production-8d52.up.railway.app/
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ['127.0.0.1', "web-production-8d52.up.railway.app", "saviloper.com"]
+ALLOWED_HOSTS = ['127.0.0.1', "web-production-af636.up.railway.app"]
 
-CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1", "https://web-production-8d52.up.railway.app", "https://saviloper.com"]
+CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1", "https://web-production-af636.up.railway.app"]
 
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
