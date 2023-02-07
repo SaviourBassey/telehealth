@@ -1,0 +1,135 @@
+{% extends "home/index.html" %}
+{% load static %}
+
+
+	{% block body %}
+        
+	<div class="page-content bg-white">
+	
+		<!-- Inner Banner -->
+		<div class="banner-wraper">
+			<div class="page-banner banner-lg contact-banner" style="background-image:url(images/banner/img1.jpg);">
+				<div class="container">
+					<div class="page-banner-entry text-center">
+						<h1>Encrypt</h1>
+						<!-- Breadcrumb row -->
+						<nav aria-label="breadcrumb" class="breadcrumb-row">
+							<ul class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Encryption</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				<img class="pt-img1 animate-wave" src="{% static 'images/shap/circle.png' %}" alt="" style="height: 80px;">
+				<!-- <img class="pt-img2 animate2" src="{% static 'images/shap/circle-dots.png' %}" alt=""> -->
+				<img class="pt-img3 animate-rotate" src="{% static 'images/shap/wave-bg.png' %}" alt="" style="height: 80px;">
+			</div>
+			<!-- Breadcrumb row END -->
+		</div>
+		<!-- Inner Banner end -->
+			
+		<!-- About us -->
+		<section class="p-5">
+			<div class="container">
+				<div class="contact-wraper">
+					<div class="row">
+						<div class="col-lg-6 mb-30">
+							<h2>Step 1 (Encrypt Information)</h2>
+							<form class="form-wraper contact-form" method="post">
+								{% csrf_token %}
+								<!-- <div class="ajax-message"></div> -->
+								<div class="row">
+									{% if ciphertext %}
+									<div class="form-group col-md-12">
+										<textarea name="message" required id="ciphertext-to-hide" class="form-control" placeholder="{{ message }}" disabled  value="{{ message }}"></textarea>
+									</div>
+									<div class="form-group col-md-12">
+										<input name="email" type="email" required class="form-control" id="email" placeholder=" Destination Email"  disabled value="{{ destination_email }}">
+									</div>
+									<div class="col-lg-12">
+										<button id="encryptTextButton" class="btn w-100 btn-secondary btn-lg" type="submit" disabled>Encrypt</button>
+									</div>
+									{% else %}
+									<div class="form-group col-md-12">
+										<textarea name="message" required class="form-control" id="plaintext" placeholder="Plain text"></textarea>
+									</div>
+									<div class="form-group col-md-12">
+										<input name="email" type="email" required class="form-control" id="email" placeholder=" Destination Email">
+									</div>
+									<div class="col-lg-12">
+										<button id="encryptTextButton" class="btn w-100 btn-primary shadow btn-lg" type="submit">Encrypt</button>
+									</div>
+									{% endif %}
+									
+								</div>
+							</form>
+						</div>
+						<div class="col-lg-6 mb-30">
+							<h2>Step 2 (Embed Ciphertext)</h2>
+							<form class="form-wraper contact-form" method="post" action="{% url 'accounts:f5-encrypt' %}" enctype="multipart/form-data">
+								{% csrf_token %}
+								<!-- <div class="ajax-message"></div> -->
+								<div class="row">
+									<div class="form-group col-md-12">
+										{% if ciphertext %}
+										<textarea name="ciphertext" required id="ciphertext-to-hide" class="form-control" placeholder="{{ ciphertext }}" disabled  value="{{ ciphertext }}"></textarea>
+										{% else %}
+										<textarea name="ciphertext" required id="ciphertext-to-hide" class="form-control" placeholder="Ciphertext"></textarea>
+										{% endif %}
+									</div>
+
+						
+									{% if ciphertext %}
+									<input name="email" type="hidden" required class="form-control" id="email" placeholder=" Destination Email" value="{{ destination_email }}">
+									<input type="hidden" name="cipher-text" id="" value="{{ ciphertext }}">
+									<input name="message" type="hidden" required class="form-control" id="email" placeholder=" Destination Email" value="{{ message }}">
+									{% endif %}
+								
+
+									<!-- <label for="steg-key">F5 key</label>
+									<div class="form-group col-md-4">
+										<input name="steg-key1" type="number" maxlength="4" required class="form-control f5keys" >
+									</div>
+									<div class="form-group col-md-4">
+										<input name="steg-key2" type="number" maxlength="4" required class="form-control f5keys">
+									</div>
+									<div class="form-group col-md-4">
+										<input name="steg-key3" type="number" maxlength="4" required class="form-control f5keys">
+									</div>
+									<div class="form-group col-md-4">
+										<input name="steg-key4" type="number" maxlength="4" required class="form-control f5keys">
+									</div>
+									<div class="form-group col-md-4">
+										<input name="steg-key5" type="number" maxlength="4" required class="form-control f5keys">
+									</div>
+									<div class="form-group col-md-4">
+										<input name="steg-key6" type="number" maxlength="4" required class="form-control f5keys">
+									</div> -->
+
+									
+
+									<div class="form-group col-md-12">
+										<input type="file" required class="form-control" id="image" placeholder="Picture" name="image-file">
+									</div>
+
+									<div id="showStatus"></div>
+									
+									<div class="col-lg-12">
+										{% if ciphertext %}
+										<button name="submit" type="submit" id="hideImageAndSend" class="btn w-100 btn-primary shadow btn-lg">Embed and send</button>
+										{% else %}
+										<button name="submit" type="submit" id="hideImageAndSend" class="btn w-100 btn-primary shadow btn-lg" disabled>Embed and Send</button>
+										{% endif %}
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+	</div>
+
+	{% endblock body %}

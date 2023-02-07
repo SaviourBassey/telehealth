@@ -1,0 +1,205 @@
+{% extends 'home/index.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	<!-- META ============================================= -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<!-- OG -->
+	<meta name="robots" content="index, follow">
+	<meta name="keywords" content="Clinic, Medical Health Center" />
+	<meta name="author" content="Decyfa" />
+	<meta name="description" content=" Health Dental, Creative, Healthcare, Industry, Lifestyle, Blogging, meditation, Design" />
+	<meta property="og:site_name" content="Decyfa - Doctor, Medical & Healthcare HTML Template"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:locale" content="en_us"/>
+	<meta property="og:title" content=" Doctor, Medical & Healthcare" />
+	<meta property="og:description" content="It is designed specifically for Clinic, Medical Health Center, Health Dental, Creative, Healthcare, Industry, Lifestyle, Blogging, meditation, Design"/>	
+	<meta name="format-detection" content="telephone=no">
+	
+	<!-- FAVICONS ICON ============================================= -->
+	<link rel="icon" href="images/favicon.png" type="image/x-icon" />
+	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+	
+	<!-- PAGE TITLE HERE ============================================= -->
+	<title>Decyfa</title>
+	
+	<!-- MOBILE SPECIFIC ============================================= -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- All PLUGINS CSS ============================================= -->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap-select/css/bootstrap-select.min.css">
+	<link rel="stylesheet" href="vendor/swiper/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/flash.min.css">
+	
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+	<div id="loading-icon-bx">
+		<div class="loading-inner">
+			<div class="load-one"></div>
+			<div class="load-two"></div>
+			<div class="load-three"></div>
+		</div>
+	</div>
+
+		<!-- header -->
+		<header class="header header-transparent rs-nav">
+			<!-- main header -->
+			<div class="sticky-header navbar-expand-lg">
+				<div class="menu-bar clearfix">
+					<div class="container-fluid clearfix">
+						<!-- website logo -->
+						<div class="menu-logo logo-dark">
+							<a href="index.html">InfoCrypt</a>
+						</div>
+						<!-- nav toggle button -->
+						<button class="navbar-toggler collapsed menuicon justify-content-end" type="button" data-bs-toggle="collapse" data-bs-target="#menuDropdown" aria-controls="menuDropdown" aria-expanded="false" aria-label="Toggle navigation">
+							<span></span>
+							<span></span>
+							<span></span>
+						</button>
+						<!-- extra nav -->
+						<!-- <div class="secondary-menu">
+							<ul>
+								<li class="btn-area"><a href="login.html" class="btn btn-primary shadow">LOGIN<i class="btn-icon-bx fas fa-chevron-right"></i></a></li>
+							</ul>
+						</div> -->
+						<!-- Search Box ==== -->
+						<div class="nav-search-bar">
+							<form action="#">
+								<input name="search" value="" type="text" class="form-control" placeholder="Type to search">
+								<span><i class="ti-search"></i></span>
+							</form>
+							<span id="searchRemove"><i class="ti-close"></i></span>
+						</div>
+						<div class="menu-links navbar-collapse collapse justify-content-end" id="menuDropdown">
+							<div class="menu-logo">
+								<a href="index.html"><img src="images/logo-white.png" alt=""></a>
+							</div>
+							<ul class="nav navbar-nav">	
+								<li class="active"><a href="index.html">Home</a></li>
+								<li><a href="about-us.html">About Us</a></li>
+								<li><a href="register.html"><span>Register</span></a></li>
+							</ul>
+							<ul class="social-media">
+								<li><a target="_blank" href="https://www.facebook.com/" class="btn btn-primary"><i class="fab fa-facebook-f"></i></a></li>
+								<li><a target="_blank" href="https://www.google.com/" class="btn btn-primary"><i class="fab fa-google"></i></a></li>
+								<li><a target="_blank" href="https://www.linkedin.com/" class="btn btn-primary"><i class="fab fa-linkedin-in"></i></a></li>
+								<li><a target="_blank" href="https://twitter.com/" class="btn btn-primary"><i class="fab fa-twitter"></i></a></li>
+							</ul>
+							<div class="menu-close">
+								<i class="ti-close"></i>
+							</div>
+						</div>
+						<!-- Navigation Menu END ==== -->
+					</div>
+				</div>
+			</div>
+			<!-- main header END -->
+		</header>
+		<!-- header END -->
+
+		{% block body %}
+	<!-- Login -->
+	<div class="section-area account-wraper2">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-xl-5 col-lg-6 col-md-8">
+					<div class="appointment-form form-wraper">
+						<div class="logo">
+							<h2>InfoCrypt</h2>
+						</div>
+						<div class="tab-content" id="myTabContent">
+							<div class="tab-pane fade show active" id="formLogin" role="tabpanel" aria-labelledby="formLogin">
+								<form method="post">
+									{% csrf_token %}
+									<div class="form-group">
+										<input type="email" id="loginEmail" class="form-control" placeholder="Email" name="email" required>
+									</div>
+									<div class="form-group">
+										<input type="password" id="loginPassword" class="form-control" name="password" placeholder="Password" required>
+									</div>
+									<div class="form-group">
+										<button type="submit" id="loginButton" class="btn mb-30 btn-lg btn-primary w-100">login</button>
+										<a href="#formForget" data-toggle="tab">Forgot Password</a>
+									</div>
+									<div class="text-center mt-40">						
+										<p class="mt-0">Dont have any account?</p>
+										<a class="btn btn-lg btn-secondary w-100" data-toggle="tab" href="{% url 'accounts:register' %}">Register</a>
+									</div>											
+								</form>
+							</div>
+							<div class="tab-pane fade" id="formRegister" role="tabpanel" aria-labelledby="formRegister">
+								<div class="tab-pane fade show active" id="register-home" role="tabpanel" aria-labelledby="register-home">
+									<form>
+										<div class="form-group">
+											<input type="text" class="form-control" id="username" placeholder="Username">
+										</div>
+										<div class="form-group">
+											<input type="email" class="form-control" id="email" placeholder="Email">
+										</div>
+										<div class="form-group">
+											<input type="password" class="form-control" id="password" placeholder="Password">
+										</div>	
+										<div class="form-group">
+											<button type="button" class="btn btn-primary w-100 radius-xl" id="registerButton">Register Now</button>
+										</div>													
+										<div class="text-center mt-40">						
+											<p class="mt-0">Already have an account?</p>
+											<a class="btn btn-lg btn-secondary w-100" data-toggle="tab" href="#formLogin">Login</a>
+										</div>	
+									</form>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="formForget" role="tabpanel" aria-labelledby="formForget">
+								<div class="tab-pane fade show active" id="login-home" role="tabpanel" aria-labelledby="login-home">
+									<form>
+										<!-- <div class="form-group">
+											<input type="password" class="form-control" placeholder="Password">
+										</div> -->
+										<div class="form-group">
+											<input type="password" id="newPassword" class="form-control" placeholder="New Password">
+										</div>						
+										<div class="form-group">
+											<button type="button" id="newPasswordButton" class="btn btn-primary w-100 radius-xl">Submit</button>
+										</div>													
+										<div class="text-center mt-40">						
+											<p class="mt-0">Already have an account?</p>
+											<a class="btn btn-lg btn-secondary w-100" data-toggle="tab" href="#formLogin">Login</a>
+										</div>	
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>					
+		</div>
+	</div>
+
+	{% endblock body %}
+	
+<!-- JAVASCRIPT FILES ========================================= -->
+<script src="js/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="vendor/magnific-popup/jquery.magnific-popup.js"></script>
+<script src="vendor/swiper/swiper.min.js"></script>
+<script src="js/functions.js"></script>
+<script src="js/contact.js"></script>
+<script src="js/baseUrl.js"></script>
+<script src="js/flash.min.js"></script>
+<script src="js/registerLogin.js"></script>
+</body>
+</html>

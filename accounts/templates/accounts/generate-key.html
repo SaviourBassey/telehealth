@@ -1,0 +1,174 @@
+{% extends "home/index.html" %}
+{% load static %}
+
+
+	{% block body %}
+	<style>
+		#publicKey{
+			width: 100% !important;
+			overflow: scroll !important;
+		}
+	</style>
+        
+	<div class="page-content bg-white">
+	
+		<!-- Inner Banner -->
+		<div class="banner-wraper">
+			<div class="page-banner banner-lg contact-banner">
+				<div class="container">
+					<div class="page-banner-entry text-center">
+						<h1>Generate Keys</h1>
+						<!-- Breadcrumb row -->
+						<nav aria-label="breadcrumb" class="breadcrumb-row">
+							<ul class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Generate Keys</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				<img class="pt-img1 animate-wave" src="{% static 'images/shap/circle.png' %}" alt="" style="height: 100px;">
+				<!-- <img class="pt-img2 animate2" src="{% static 'images/shap/circle-dots.png' %}" alt=""> -->
+				<img class="pt-img3 animate-rotate" src="{% static 'images/shap/circle.png' %}" alt="" style="height: 100px;">
+			</div>
+			<!-- Breadcrumb row END -->
+		</div>
+		<!-- Inner Banner end -->
+			
+		<!-- About us -->
+		<section class="p-5">
+			<div class="container">
+				<div class="contact-wraper">
+					<div class="row">
+						<div class="col-lg-12 mb-30">
+							{% if public_key %}
+							<form class="form-wraper contact-form" method="post">
+								{% csrf_token %}
+								<!-- <div class="ajax-message"></div> -->
+								<div class="row">
+									<div class="form-group col-md-12">
+										<input name="destination_email" type="email" required class="form-control" id="email" placeholder="Destination Email" disabled value="{{ email }}">
+									</div>
+									<div class="form-group col-md-12">
+										<input name="key_length" type="number" required class="form-control" id="keyLength" placeholder="RSA Key Length" disabled value="{{ key_length }}">
+									</div>
+
+									<div class="col-lg-12 mb-30">
+										<div class="form-wraper contact-form">
+											<div class="row">
+												<label for="steg-key">F5 key</label>
+												<div class="form-group col-md-4">
+													<input name="steg-key1" type="number" maxlength="4" required class="form-control f5keys" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;" disabled value="{{ steg_key1 }}">
+												</div>
+												<div class="form-group col-md-4">
+													<input name="steg-key2" type="number" maxlength="4" required class="form-control f5keys"pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;" disabled value="{{ steg_key2 }}">
+												</div>
+												<div class="form-group col-md-4">
+													<input name="steg-key3" type="number" maxlength="4" required class="form-control f5keys"pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;" disabled value="{{ steg_key3 }}">
+												</div>
+												<div class="form-group col-md-4">
+													<input name="steg-key4" type="number" maxlength="4" required class="form-control f5keys"pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;" disabled value="{{ steg_key4 }}">
+												</div>
+												<div class="form-group col-md-4">
+													<input name="steg-key5" type="number" maxlength="4" required class="form-control f5keys"pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;" disabled value="{{ steg_key5 }}">
+												</div>
+												<div class="form-group col-md-4">
+													<input name="steg-key6" type="number" maxlength="4" required class="form-control f5keys"pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;" disabled value="{{ steg_key6 }}">
+												</div>
+												<div class="form-group col-md-4">
+													<input name="steg-key7" type="number" maxlength="4" required class="form-control f5keys"pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;" disabled value="{{ steg_key7 }}">
+												</div>
+												<div class="form-group col-md-4">
+													<input name="steg-key8" type="number" maxlength="4" required class="form-control f5keys"pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;" disabled value="{{ steg_key8 }}">
+												</div>
+												<div class="form-group col-md-4">
+													<input name="steg-key9" type="number" maxlength="4" required class="form-control f5keys"pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;" disabled value="{{ steg_key9 }}">
+												</div>
+											</div>				
+										</div>	
+									</div>
+
+									<div class="form-group col-md-12">
+										<div id="keyStatus"></div>
+									<div id="publicKey">
+										<p>{{ public_key }}</p>
+									</div>
+									</div>
+									
+									<div class="col-lg-12">
+										<button name="submit" type="submit" value="Submit" id="generateKeyButton" class="btn w-100 btn-primary btn-lg" disabled>Generate Key</button>
+									</div>
+								</div>
+							</form>
+							{% else %}
+							<form class="form-wraper contact-form" method="post">
+								{% csrf_token %}
+								<!-- <div class="ajax-message"></div> -->
+								<div class="row">
+									<div class="form-group col-md-12">
+										<input name="destination_email" type="email" required class="form-control" id="email" placeholder="Destination Email">
+									</div>
+									<div class="form-group col-md-12">
+										<input name="key_length" type="number" required class="form-control" id="keyLength" placeholder="RSA Key Length">
+									</div>
+
+									<div class="col-lg-12 mb-30">
+										<div class="form-wraper contact-form">
+											<div class="row">
+												<label for="steg-key">F5 key</label>
+												<div class="form-group col-md-4">
+													<input name="steg-key1" type="number" maxlength="4" required class="form-control f5keys" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;">
+												</div>
+												<div class="form-group col-md-4">
+													<input name="steg-key2" type="number" maxlength="4" required class="form-control f5keys"pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;">
+												</div>
+												<div class="form-group col-md-4">
+													<input name="steg-key3" type="number" maxlength="4" required class="form-control f5keys"pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;">
+												</div>
+												<div class="form-group col-md-4">
+													<input name="steg-key4" type="number" maxlength="4" required class="form-control f5keys"pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;">
+												</div>
+												<div class="form-group col-md-4">
+													<input name="steg-key5" type="number" maxlength="4" required class="form-control f5keys"pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;">
+												</div>
+												<div class="form-group col-md-4">
+													<input name="steg-key6" type="number" maxlength="4" required class="form-control f5keys"pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;">
+												</div>
+												<div class="form-group col-md-4">
+													<input name="steg-key7" type="number" maxlength="4" required class="form-control f5keys"pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;">
+												</div>
+												<div class="form-group col-md-4">
+													<input name="steg-key8" type="number" maxlength="4" required class="form-control f5keys"pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;">
+												</div>
+												<div class="form-group col-md-4">
+													<input name="steg-key9" type="number" maxlength="4" required class="form-control f5keys"pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;">
+												</div>
+											</div>
+											
+										</div>
+										
+									</div>
+
+									<div class="form-group col-md-12">
+										<div id="keyStatus"></div>
+									<div id="publicKey">
+									</div>
+									</div>
+									
+									<div class="col-lg-12">
+										<button name="submit" type="submit" value="Submit" id="generateKeyButton" class="btn w-100 btn-primary shadow btn-lg">Generate Key</button>
+									</div>
+								</div>
+							</form>
+							{% endif %}
+						</div>
+						
+						
+					</div>
+				</div>
+			</div>
+		</section>
+		
+	</div>
+
+	{% endblock body %}

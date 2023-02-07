@@ -1,0 +1,96 @@
+{% extends "home/index.html" %}
+{% load static %}
+
+
+	{% block body %}
+        
+	<div class="page-content bg-white">
+	
+		<!-- Inner Banner -->
+		<div class="banner-wraper">
+			<div class="page-banner banner-lg contact-banner" style="background-image:url(images/banner/img1.jpg);">
+				<div class="container">
+					<div class="page-banner-entry text-center">
+						<h1>Sending Keys</h1>
+						<!-- Breadcrumb row -->
+						<nav aria-label="breadcrumb" class="breadcrumb-row">
+							<ul class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Sending keys</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				<img class="pt-img1 animate-wave" src="{% static 'images/shap/circle.png' %}" alt="" style="height: 80px;">
+				<!-- <img class="pt-img2 animate2" src="{% static 'images/shap/circle-dots.png' %}" alt=""> -->
+				<img class="pt-img3 animate-rotate" src="{% static 'images/shap/wave-bg.png' %}" alt="" style="height: 70px;">
+			</div>
+			<!-- Breadcrumb row END -->
+		</div>
+		<!-- Inner Banner end -->
+			
+		<!-- About us -->
+		<section class="p-5">
+			<div class="container">
+				<div class="contact-wraper">
+					<div class="row">
+						<div class="col-lg-12 mb-30">
+							<h2 class="text-center">Sending Keys</h2>
+							
+								<!-- <div class="ajax-message"></div> -->
+								<div class="row">
+									<div class="form-group col-md-12">
+										{% if sending_user_records == None %}
+											<p class="text-center">You don't have a sending key yet</p>
+										{% else %}
+                                        <table>
+                                            <thead>
+                                              <tr>
+                                                <th rowspan="2" class="col-md-1">S/N</th>
+                                                <th rowspan="3" class="col-md-2" >Destination Address</th>
+                                                <!-- <th colspan="5" id="table-heading-3">Subjects</th> -->
+                                                <th rowspan="2" class="col-md-3">Public Key(s)</th>
+                                                <th rowspan="2" class="col-md-3">Stego-File</th>
+                                                <th rowspan="2" class="col-md-2">F5 Key(s)</th>
+                                                <th rowspan="2" class="col-md-1">Timestamp</th>
+                                              </tr>
+                                              <!-- <tr class="subjects-row">
+                                                <td>Mathematics</td>
+                                                <td>English</td>
+                                                <td>Physics</td>
+                                                <td>Chemistry</td>
+                                                <td>Biology</td> -->
+                                              </tr>
+                                            </thead>
+                                                
+                                            
+                                            <tbody>
+												{% for record in sending_user_records %}
+												<tr>
+                                                    <td>{{ forloop.revcounter }}</td>
+                                                    <td>{{ record.destination_email }}</td>
+                                                    <td><a href="{{ record.public_key.url }}" download>Download PublicKey</a></td>
+                                                    <td><a href="#">#Remove row</a></td>
+                                                    <td><a href="{{ record.f5_order.url }}" download>Download F5</a></td>
+                                                    <td><small>{{ record.timestamp }}</small></td>
+                                                </tr>
+												{% endfor %}
+                                            </tbody>
+                                      
+                                          </table>
+										  {% endif %}
+                                    </div>
+									
+									
+									
+								</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</section>
+		
+	</div>
+
+	{% endblock body %}
